@@ -261,6 +261,10 @@ fn main() {
         }
     }
 
+    if env::var_os("RUSTC_THREADED").is_some() {
+        cmd.arg("--cfg").arg("threaded");
+    }
+
     let color = match env::var("RUSTC_COLOR") {
         Ok(s) => usize::from_str(&s).expect("RUSTC_COLOR should be an integer"),
         Err(_) => 0,
